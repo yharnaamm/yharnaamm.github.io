@@ -132,6 +132,24 @@
 				<div class="text-center md:text-left">
 					<h1 class="text-2xl md:text-3xl font-light mb-2">yharnam</h1>
 					<p class="text-lg text-gray-400">front-end dev.</p>
+					<!-- Game section -->
+					<div class="flex items-center gap-3 mb-4">
+						<img id="game-icon" src="" alt="Game Icon" class="w-16 h-16 rounded hidden"> <!-- 64x64 -->
+						<span id="game-status" class="text-white text-base">Загрузка игры...</span>
+					</div>
+
+					<!-- Spotify section -->
+					<div id="spotify-status" class="flex items-center gap-3 hidden">
+						<img id="spotify-album" src="" alt="Album Art" class="w-16 h-16 rounded"> <!-- 64x64 -->
+						<div class="text-sm">
+							<p id="spotify-track" class="text-white text-base"></p>
+							<p id="spotify-artist" class="text-gray-400 text-sm"></p>
+						</div>
+					</div>
+					</div>
+				</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -321,6 +339,67 @@
 
 			// Инициализация
 			updateCarousel()
+
+			const userId = '493065760617398272';
+
+const customGameIcons = {
+	'Dota 2': 'https://cdn2.steamgriddb.com/logo_thumb/a0b45d1bb84fe1bedbb8449764c4d5d5.png', // Иконка Dota 2
+	'Counter-Strike 2': 'https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg', // Пример
+	'Team Fortress 2': 'https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg',
+	// добавляй другие игры здесь
+};
+
+async function fetchDiscordData() {
+	const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+	const data = await res.json();
+
+	if (!data.success) return;
+
+	const discordData = data.data;
+
+	// --- Игра ---
+	const game = discordData.activities.find(a => a.type === 0);
+	const gameStatus = document.getElementById('game-status');
+	const gameIcon = document.getElementById('game-icon');
+
+	if (game) {
+		gameStatus.textContent = game.name;
+
+		// Пытаемся получить иконку из Discord
+		if (game.assets?.large_image && game.application_id) {
+			const imageId = game.assets.large_image.replace('mp:', '');
+			gameIcon.src = `https://cdn.discordapp.com/app-assets/${game.application_id}/${imageId}.png`;
+			gameIcon.classList.remove('hidden');
+		}
+		// Если нет – используем свою
+		else if (customGameIcons[game.name]) {
+			gameIcon.src = customGameIcons[game.name];
+			gameIcon.classList.remove('hidden');
+		}
+		else {
+			gameIcon.classList.add('hidden');
+		}
+	} else {
+		gameStatus.textContent = "Не играет в игры сейчас";
+		gameIcon.classList.add('hidden');
+	}
+
+	// --- Spotify ---
+	const spotify = discordData.spotify;
+	const spotifyContainer = document.getElementById('spotify-status');
+
+	if (spotify) {
+		document.getElementById('spotify-album').src = spotify.album_art_url;
+		document.getElementById('spotify-track').textContent = spotify.song;
+		document.getElementById('spotify-artist').textContent = spotify.artist;
+		spotifyContainer.classList.remove('hidden');
+	} else {
+		spotifyContainer.classList.add('hidden');
+	}
+}
+
+fetchDiscordData();
+setInterval(fetchDiscordData, 10000);
 		</script>
 	</body>
 </html>
