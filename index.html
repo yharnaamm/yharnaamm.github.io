@@ -380,7 +380,7 @@ async function fetchDiscordData() {
 			gameIcon.classList.add('hidden');
 		}
 	} else {
-		gameStatus.textContent = "Не играет в игры сейчас";
+		gameStatus.textContent = "afk";
 		gameIcon.classList.add('hidden');
 	}
 
@@ -403,4 +403,5 @@ setInterval(fetchDiscordData, 10000);
 		</script>
 	</body>
 </html>
+
 
