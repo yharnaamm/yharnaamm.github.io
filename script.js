@@ -27,7 +27,8 @@ const tiles = carousel.querySelectorAll('.social-tile')
 const tileWidth = tiles[0].offsetWidth + 14
 let currentIndex = 0
 
-const API_URL = 'https://yharnaammbot.loca.lt/api/activity'
+const API_URL =
+	'https://applicants-blessed-education-translator.trycloudflare.com/api/activity'
 
 async function updateWidget() {
 	try {
