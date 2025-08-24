@@ -1,3 +1,13 @@
+fetch(url, {
+	method: 'get',
+	headers: new Headers({
+		'ngrok-skip-browser-warning': '69420',
+	}),
+})
+	.then(response => response.json())
+	.then(data => console.log(data))
+	.catch(err => console.log(err))
+
 const cursor = document.querySelector('.cursor-trail')
 
 document.addEventListener('mousemove', e => {
@@ -123,16 +133,6 @@ async function checkImageExists(url) {
 		return false
 	}
 }
-
-fetch(url, {
-	method: 'get',
-	headers: new Headers({
-		'ngrok-skip-browser-warning': '69420',
-	}),
-})
-	.then(response => response.json())
-	.then(data => console.log(data))
-	.catch(err => console.log(err))
 
 // Обновляем сразу и каждые 10 секунд
 updateWidget()
