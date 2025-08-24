@@ -28,7 +28,7 @@ const tileWidth = tiles[0].offsetWidth + 14
 let currentIndex = 0
 
 const API_URL =
-	'https://applicants-blessed-education-translator.trycloudflare.com/api/activity'
+	'https://macintosh-ask-it-champions.trycloudflare.com /api/activity'
 
 async function updateWidget() {
 	try {
