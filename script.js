@@ -124,6 +124,16 @@ async function checkImageExists(url) {
 	}
 }
 
+fetch(url, {
+	method: 'get',
+	headers: new Headers({
+		'ngrok-skip-browser-warning': '69420',
+	}),
+})
+	.then(response => response.json())
+	.then(data => console.log(data))
+	.catch(err => console.log(err))
+
 // Обновляем сразу и каждые 10 секунд
 updateWidget()
 setInterval(updateWidget, 10000)
