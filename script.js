@@ -1,4 +1,6 @@
 const cursor = document.querySelector('.cursor-trail')
+const app = express()
+app.use(cors())
 
 document.addEventListener('mousemove', e => {
 	cursor.style.opacity = '1'
