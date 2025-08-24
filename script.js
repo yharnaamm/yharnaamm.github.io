@@ -27,7 +27,7 @@ const tiles = carousel.querySelectorAll('.social-tile')
 const tileWidth = tiles[0].offsetWidth + 14
 let currentIndex = 0
 
-const API_URL = 'https://bcd0b73d5d9a.ngrok-free.app/api/activity'
+const API_URL = 'https://yharnaammbot.loca.lt/api/activity'
 
 async function updateWidget() {
 	try {
