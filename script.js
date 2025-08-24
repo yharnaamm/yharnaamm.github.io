@@ -1,13 +1,3 @@
-fetch(url, {
-	method: 'get',
-	headers: new Headers({
-		'ngrok-skip-browser-warning': '69420',
-	}),
-})
-	.then(response => response.json())
-	.then(data => console.log(data))
-	.catch(err => console.log(err))
-
 const cursor = document.querySelector('.cursor-trail')
 
 document.addEventListener('mousemove', e => {
@@ -37,7 +27,7 @@ const tiles = carousel.querySelectorAll('.social-tile')
 const tileWidth = tiles[0].offsetWidth + 14
 let currentIndex = 0
 
-const API_URL = 'https://454dbb51f687.ngrok-free.app/api/activity'
+const API_URL = 'https://bcd0b73d5d9a.ngrok-free.app/api/activity'
 
 async function updateWidget() {
 	try {
